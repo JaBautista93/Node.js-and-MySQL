@@ -34,7 +34,7 @@ function runStore() {
       .prompt({
         name: "action",
         type: "list",
-        message: "What would you like to do?",
+        message: "What would you like to order?",
         choices: [
           "What type of pizza would you like to buy?",
           "How many pies?",
