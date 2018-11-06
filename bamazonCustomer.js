@@ -56,15 +56,15 @@ function runStore() {
   function buyPizza() {
     inquirer
       .prompt({
-        name: "artist",
+        name: "Pizza Type",
         type: "input",
-        message: "What artist would you like to search for?"
+        message: "What type of Pizza would you like to Order?"
       })
       .then(function(answer) {
-        var query = "SELECT position, song, year FROM top5000 WHERE ?";
-        connection.query(query, { artist: answer.artist }, function(err, res) {
+        var query = "SELECT * FROM bamazon WHERE ?";
+        connection.query(query, { product_name: answer.product_name }, function(err, res) {
           for (var i = 0; i < res.length; i++) {
-            console.log("Position: " + res[i].position + " || Song: " + res[i].song + " || Year: " + res[i].year);
+            console.log("Position: " + res[i].id + " || Pizza Type: " + res[i].product_name + " || department_name: " + res[i].price);
           }
           runStore();
         });
@@ -72,7 +72,7 @@ function runStore() {
   }
   
   function howmanyPizza() {
-    var query = "SELECT artist FROM top5000 GROUP BY artist HAVING count(*) > 1";
+    var query = "SELECT product_name FROM bamazon GROUP BY artist HAVING count(*) > 1";
     connection.query(query, function(err, res) {
       for (var i = 0; i < res.length; i++) {
         console.log(res[i].artist);
@@ -80,3 +80,5 @@ function runStore() {
       runStore();
     });
   }
+
+  runStore()
