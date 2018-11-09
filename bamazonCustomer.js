@@ -20,7 +20,8 @@ var connection = mysql.createConnection({
 connection.connect(function (err) {
   if (err) throw err;
   console.log("connected as id " + connection.threadId);
-  afterConnection();
+  // afterConnection();
+  runStore(); 
 });
 
 function afterConnection() {
@@ -44,8 +45,9 @@ function runStore() {
       ]
     })
     .then(function (answer) {
-      // based on their answer, either call the bid or the post functions
-      switch (answer.action) {
+      // based on their answer, either order pizza or create there own
+      console.log(answer)
+      switch (answer.orderorLeave) {
         case "ORDER":
           buyPizza();
           break;
@@ -60,6 +62,7 @@ function runStore() {
 function buyPizza() {
   // we need to query all the pizza types available to buy
   connection.query("SELECT * FROM products", function (err, results) {
+    console.log(results)
     if (err) throw err;
     // we should have the items and prompt the customer for the type of pizza they want to buy
     inquirer
@@ -78,7 +81,7 @@ function buyPizza() {
         {
           name: "cash",
           type: "input",
-          message: "Do you have enough cash or do I have to have my two friends talk to you out back?"
+          message: "How much cash do you have, I am not running a charity?"
         }
       ])
       .then(function (answer) {
@@ -128,7 +131,7 @@ function createPie() {
       {
         name: "Topping",
         type: "input",
-        message: "What toppings do you want on your pizza?"
+        message: "Do you want a Single Topping, Double Topping, Triple Topping, or Speciality?"
       },
       {
         name: "Quanity",
@@ -148,13 +151,13 @@ function createPie() {
         "INSERT INTO products SET ?", {
           pizza: answer.Pizza,
           topping: answer.Topping,
-          price: "18.00",
           pizza_quantity: answer.Quantity,
+          price: "18.00",
         },
         function (err) {
           if (err) throw err;
           console.log("Your Pizza masterpiece was made with love Piasan!!");
-          // re-prompt the user for if they want to bid or post
+          // re-prompt the user for if they want to order a pie or create one
           runStore();
         }
       );
