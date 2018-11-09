@@ -94,7 +94,7 @@ function buyPizza() {
               }
             }
             // does this Paisan have enough cash for their pizza??
-            if (chosenPie.price < parseInt(answer.cash)) {
+            if (chosenPie.price >= parseInt(answer.cash)) {
               // if the paisan got the cash...update the database, let the them know whats up and grab the next customer
               connection.query(
                 "UPDATE products SET ? WHERE ?",
@@ -108,13 +108,6 @@ function buyPizza() {
                 function (error) {
                   if (error) throw err;
                   console.log("Your money is good here...Here is your pie");
-                  connection.query(
-                    "INSERT INTO products SET ?", {
-                      pizza: answer.Pizza,
-                      topping: answer.Topping,
-                      pizza_quantity: answer.Pizza_quantity,
-                      price: "18.00",
-                    },
                     runStore();
                   }
                 );
