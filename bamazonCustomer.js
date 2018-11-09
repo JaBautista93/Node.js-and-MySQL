@@ -28,6 +28,7 @@ function afterConnection() {
     if (err) throw err;
     console.log(res);
     connection.end();
+    runStore();
   });
 }
 
@@ -50,8 +51,7 @@ function runStore() {
           break;
 
         case "CREATE":
-          // howmanyPizza();
-          createPie()
+          createPie();
           break;
       }
     });
