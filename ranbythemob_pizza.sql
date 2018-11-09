@@ -1,8 +1,8 @@
-DROP DATABASE IF EXISTS bamazonDB;
+DROP DATABASE IF EXISTS ranbythemob_pizzaDB;
 
-CREATE DATABASE bamazonDB;
+CREATE DATABASE ranbythemob_pizzaDB;
 
-USE bamazonDB;
+USE ranbythemob_pizzaDB;
 
 CREATE TABLE products(
   id INT NOT NULL AUTO_INCREMENT,

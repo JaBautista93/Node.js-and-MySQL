@@ -13,7 +13,7 @@ var connection = mysql.createConnection({
 
   // password
   password: "kUaf,UUEq3Te",
-  database: "bamazonDB"
+  database: "ranbythemob_pizzaDB"
 });
 
 // connect to the mysql server and sql database
@@ -94,7 +94,7 @@ function buyPizza() {
               }
             }
             // does this Paisan have enough cash for their pizza??
-            if (chosenPie.price >= parseInt(answer.cash)) {
+            if (chosenPie.price <= parseInt(answer.cash)) {
               // if the paisan got the cash...update the database, let the them know whats up and grab the next customer
               connection.query(
                 "UPDATE products SET ? WHERE ?",
