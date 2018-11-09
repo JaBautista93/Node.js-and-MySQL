@@ -4,7 +4,7 @@ CREATE DATABASE bamazonDB;
 
 USE bamazonDB;
 
-CREATE TABLE products (
+CREATE TABLE products(
   id INT NOT NULL AUTO_INCREMENT,
   pizza VARCHAR(45) NULL,
   topping VARCHAR(45) NULL,
