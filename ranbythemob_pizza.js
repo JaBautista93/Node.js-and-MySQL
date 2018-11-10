@@ -79,6 +79,8 @@ function buyPizza() {
           },
           message: "What do you want to order my lil Piasan, I don't got all day"
         },
+        // Need to deduct one from the Quantity
+        // eatPizza(),
         {
           name: "cash",
           type: "input",
@@ -164,9 +166,44 @@ function createPie() {
       );
     });
 }
+
+function eatPizza() {
+  // prompt for info about the item being put up for auction
+  inquirer
+    .prompt([{
+        name: "Pies_Quantity",
+        type: "message",
+        message: "Check out the menu for Pie"
+      },
+      {
+        name: "Pies",
+        type: "input",
+        message: "How many Pies do you want?"
+        // validate: function (value) {
+        //   if (isNaN(value) === false) {
+        //     return true;
+        //   }
+        //   return false;
+        // }
+      }
+    ])
+    .then(function (answer) {
+      // when finished prompting, insert a new item into the db with that info
+      connection.query(
+        "DELETE FROM products WHERE pizza_quantity", {
+          pizza_quantity: answer.Pies,
+        },
+        function (err) {
+          if (err) throw err;
+          console.log("Slow down kid, you are going to get a stomach ache");
+          // re-prompt the user for if they want to order a pie or create one
+        }
+      );
+    });
+}
 // What I have left to complete //
 
-// Need to add the ability to order a quanity of Pies 
-// Need to multiple the quantity of pies by the cost of a single pie
+// Need to add the ability to order a quanity of Pies eatPizza()
+// Need to multiple the quantity of pies by the cost of a single pie eatPizza()
 // Need to make sure the fucntion gets updated to ensure that the Paisan has cash
 // Need to figure out how to deduct the qaunity of the Pie from the Pizzeria
