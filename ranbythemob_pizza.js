@@ -204,6 +204,7 @@ function eatPizza() {
 // What I have left to complete //
 
 // Need to add the ability to order a quanity of Pies eatPizza()
+// read about update and select exsisting inventory google that "CRUD" create read update and delete
 // Need to multiple the quantity of pies by the cost of a single pie eatPizza()
 // Need to make sure the fucntion gets updated to ensure that the Paisan has cash
 // Need to figure out how to deduct the qaunity of the Pie from the Pizzeria
